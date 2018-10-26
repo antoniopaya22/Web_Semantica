@@ -1,5 +1,11 @@
-# -*- encoding:utf-8 -*-
+# -*- coding: utf-8 -*-
 
+#=========================================================
+# Clase: Simhash
+#
+# Autor: Antonio Paya Gonzalez
+#
+#=========================================================
 
 from __future__ import print_function
 from __future__ import unicode_literals
@@ -11,12 +17,12 @@ import argparse
 from heapq import heapify, heappop
 from nltk import ngrams
 
-def simhash(line,restrictiveness, ngram=0):
+def simhash(line, restrictiveness, ngram=0):
     """Realiza simhash
 
-    :param line:
-    :param restrictiveness:
-    :param ngram:
+    :param line: texto
+    :param restrictiveness
+    :param ngram: numero de ngramas
     :return:
     """
     if(ngram < 0):
@@ -32,7 +38,7 @@ def simhash(line,restrictiveness, ngram=0):
 
 
 def calculate_hashes(bag, restrictiveness):
-    hashes = [binascii.crc32(x) & 0xffffffff for x in bag]
+    hashes = [binascii.crc32(x.encode("utf-8")) & 0xffffffff for x in bag]
     heapify(hashes)  # ordenar de pequeño a mayor
     simh = 0
     if(len(hashes) <= restrictiveness):

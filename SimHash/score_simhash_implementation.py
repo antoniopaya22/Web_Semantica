@@ -29,8 +29,8 @@ def main(args):
 
 
 def score_implementation(simhash, restrictiveness, ngram):
-    expected_matches = read_truth("./articles_100.truth")
-    index = create_index("./articles_100.train", simhash, restrictiveness, ngram)
+    expected_matches = read_truth("./articles_10000.truth")
+    index = create_index("./articles_10000.train", simhash, restrictiveness, ngram)
     got_matches = get_matches(index)
     print("\n" + ">" * 80)
     print("- EXPECTED MATCHES")
@@ -38,7 +38,7 @@ def score_implementation(simhash, restrictiveness, ngram):
     print(">" * 80)
     print_matches_comparation(expected_matches, got_matches)
     print("<" * 80)
-    print_score(expected_matches, got_matches)
+    return print_score(expected_matches, got_matches)
 
 
 def create_index(file, simhash, restrictiveness, ngram_len):
@@ -72,6 +72,7 @@ def print_score(expected_matches, got_matches):
     s2 = set(got_matches)
     score = len(s1.intersection(s2)) / len(s1.union(s2))
     print("SCORE: {}".format(score))
+    return score
 
 
 def read_truth(text):
